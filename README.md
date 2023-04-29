@@ -19,3 +19,6 @@ This is how I start my backend using node and express..
 `npm i express`
 `npm i nodemon`
 `"start": "npx nodemon src/app.js"`
+
+JSON Validator Website ➡️ https://jsonlint.com/
+JavaScript Object Notation is a standard text-based format for representing structured data based on JavaScript object syntax. It is commonly used for transmitting data in web applications (e.g., sending some data from the server to the client, so it can be displayed on a web page, or vice versa).
