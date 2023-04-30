@@ -22,3 +22,53 @@ This is how I start my backend using node and express..
 
 JSON Validator Website ➡️ https://jsonlint.com/
 JavaScript Object Notation is a standard text-based format for representing structured data based on JavaScript object syntax. It is commonly used for transmitting data in web applications (e.g., sending some data from the server to the client, so it can be displayed on a web page, or vice versa).
+
+for a POST request
+`app.use(express.json());`
+`app.use(express.urlencoded({ extended: true }));`
+
+MongoDB setup Cloud database
+You changed the password in your note
+
+- npm install mongodb
+- npm i mongoose
+
+```
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://gluaysmedley:<password>@cluster0.ozpmoul.mongodb.net/?retryWrites=true&w=majority";
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
+```
+
+`npm i dotenv`
+use if statement
+
+```
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config();
+}
+```
+
+if not run this command in terminal
+`NODE_ENV=production npm start`
