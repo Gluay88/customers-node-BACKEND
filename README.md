@@ -44,3 +44,19 @@ if (process.env.NODE_ENV !== "production") {
 
 if not run this command in terminal
 `NODE_ENV=production npm start`
+
+Query Prerameter for Postman-MongoDB
+
+```
+http://localhost:3005/api/customers?id=644dd0c2bf8c46bd26fd0499
+```
+
+```
+http://localhost:3005/api/customers/644dd0c2bf8c46bd26fd0499
+```
+
+```
+app.get("/api/customers/:id", async (req, res) => {
+  res.json({ requestParams: req.params });
+});
+```

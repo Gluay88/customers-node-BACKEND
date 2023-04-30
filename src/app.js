@@ -37,6 +37,7 @@ const customer = new Customer({
   industry: "nap department",
 });
 
+// GET Request
 app.get("/", (req, res) => {
   res.send("Welcome to Nap Department");
 });
@@ -51,6 +52,11 @@ app.get("/api/customers", async (req, res) => {
   }
 });
 
+app.get("/api/customers/:id", async (req, res) => {
+  res.json({ requestParams: req.params });
+});
+
+// POST Request
 app.post("/api/customers", async (req, res) => {
   console.log(req.body);
   const customer = new Customer(req.body);
