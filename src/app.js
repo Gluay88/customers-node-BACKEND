@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const Customer = require("./models/customer");
 
 const app = express();
 mongoose.set("strictQuery", false);
@@ -31,17 +32,34 @@ const customers = [
   },
 ];
 
+const customer = new Customer({
+  name: "feynman",
+  industry: "nap department",
+});
+
 app.get("/", (req, res) => {
-  res.send("Welcome to my node site!");
+  res.send("Welcome to Nap Department");
 });
 
-app.get("/api/customers", (req, res) => {
-  res.send({ customers: customers });
+app.get("/api/customers", async (req, res) => {
+  //   console.log(await mongoose.connection.db.listCollections().toArray());
+  try {
+    const result = await Customer.find();
+    res.send({ customers: result });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
-app.post("/api/customers", (req, res) => {
+app.post("/api/customers", async (req, res) => {
   console.log(req.body);
-  res.send(req.body);
+  const customer = new Customer(req.body);
+  try {
+    await customer.save();
+    res.status(201).json({ customer });
+  } catch (e) {
+    res.status(400).json({ error: e.message });
+  }
 });
 
 app.post("/", (req, res) => {
