@@ -60,3 +60,6 @@ app.get("/api/customers/:id", async (req, res) => {
   res.json({ requestParams: req.params });
 });
 ```
+
+Link Backend to Frontend
+`npm i cors`

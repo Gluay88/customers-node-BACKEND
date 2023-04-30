@@ -1,9 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Customer = require("./models/customer");
+const cors = require("cors");
 
 const app = express();
 mongoose.set("strictQuery", false);
+
+app.use(cors());
 
 // for a post request
 app.use(express.json());
