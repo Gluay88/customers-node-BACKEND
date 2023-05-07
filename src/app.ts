@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 import Customer from "./models/customer";
 const cors = require("cors");
+import { Request, Response } from "express";
 
 const app = express();
 mongoose.set("strictQuery", false);
@@ -41,11 +42,11 @@ const customer = new Customer({
 });
 
 // GET Request
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Welcome to Nap Department");
 });
 
-app.get("/api/customers", async (req, res) => {
+app.get("/api/customers", async (req: Request, res: Response) => {
   // console.log(await mongoose.connection.db.listCollections().toArray());
   try {
     const result = await Customer.find();
@@ -55,7 +56,7 @@ app.get("/api/customers", async (req, res) => {
   }
 });
 
-app.get("/api/customers/:id", async (req, res) => {
+app.get("/api/customers/:id", async (req: Request, res: Response) => {
   try {
     const { id: customerId } = req.params;
     const customer = await Customer.findById(customerId);
@@ -70,7 +71,7 @@ app.get("/api/customers/:id", async (req, res) => {
 });
 
 // UPDATE - EDIT
-app.put("/api/customers/:id", async (req, res) => {
+app.put("/api/customers/:id", async (req: Request, res: Response) => {
   try {
     const customerId = req.params.id;
     const customer = await Customer.findOneAndReplace(
@@ -86,7 +87,7 @@ app.put("/api/customers/:id", async (req, res) => {
 });
 
 // PATCH - Specific field updated
-app.patch("/api/customers/:id", async (req, res) => {
+app.patch("/api/customers/:id", async (req: Request, res: Response) => {
   try {
     const customerId = req.params.id;
     const customer = await Customer.findOneAndUpdate(
@@ -102,7 +103,7 @@ app.patch("/api/customers/:id", async (req, res) => {
 });
 
 // DELETE
-app.delete("/api/customers/:id", async (req, res) => {
+app.delete("/api/customers/:id", async (req: Request, res: Response) => {
   try {
     const customerId = req.params.id;
     const result = await Customer.deleteOne({ _id: customerId });
@@ -113,7 +114,7 @@ app.delete("/api/customers/:id", async (req, res) => {
 });
 
 // POST Request == CREATE
-app.post("/api/customers", async (req, res) => {
+app.post("/api/customers", async (req: Request, res: Response) => {
   console.log(req.body);
   const customer = new Customer(req.body);
   try {
@@ -125,7 +126,7 @@ app.post("/api/customers", async (req, res) => {
 });
 
 // Endpoint Modify Nested Data - replace individual order api/orders/id
-app.patch("/api/orders/:id", async (req, res) => {
+app.patch("/api/orders/:id", async (req: Request, res: Response) => {
   console.log(req.params);
   const orderId = req.params.id;
   // not have to get a new id (prevent in MongoDB)
@@ -151,7 +152,7 @@ app.patch("/api/orders/:id", async (req, res) => {
 });
 
 // GET Order Id - Endpoint
-app.get("/api/orders/:id", async (req, res) => {
+app.get("/api/orders/:id", async (req: Request, res: Response) => {
   try {
     const result = await Customer.findOne({ "orders._id": req.params.id });
     if (result) {
@@ -165,7 +166,7 @@ app.get("/api/orders/:id", async (req, res) => {
   }
 });
 
-app.post("/", (req, res) => {
+app.post("/", (req: Request, res: Response) => {
   res.send("This is a post request!");
 });
 

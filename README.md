@@ -112,5 +112,31 @@ tsc -p tsconfig.json --watch
 
 in tsconfig.json
 Type Checking section chagne
+``
 noImplicitAny:false
+
+```
+
+```
+
 useUnknownInCatchVariables": false
+
+```
+
+```
+
+npm i @types/express
+
+```
+
+```
+
+noImplicitAny:true
+
+```
+
+```
+
+```
+async (req: Request, res: Response)
+```
