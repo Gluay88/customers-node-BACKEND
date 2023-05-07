@@ -63,3 +63,40 @@ app.get("/api/customers/:id", async (req, res) => {
 
 Link Backend to Frontend
 `npm i cors`
+
+\*\*\* I decided to use Typescript
+
+```
+npm i -D typescript
+or
+npm i -g typescript
+```
+
+- generante tsconfig.json for typscript
+
+```
+tsc --init
+```
+
+```
+tsc src/index.tsx
+```
+
+-compile project
+
+```
+tsc -p tsconfig.json
+```
+
+- if you comfile and get some errors
+  add this line to ignore it
+
+```
+//@ts-nocheck
+```
+
+- anything change has made it is going to complie and generate again
+
+```
+tsc -p tsconfig.json --watch
+```
