@@ -46,7 +46,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api/customers", async (req, res) => {
-  //   console.log(await mongoose.connection.db.listCollections().toArray());
+  // console.log(await mongoose.connection.db.listCollections().toArray());
   try {
     const result = await Customer.find();
     res.send({ customers: result });
@@ -121,6 +121,32 @@ app.post("/api/customers", async (req, res) => {
     res.status(201).json({ customer });
   } catch (e) {
     res.status(400).json({ error: e.message });
+  }
+});
+
+// Endpoint Modify Nested Data - replace individual order api/orders/id
+app.patch("/api/orders/:id", async (req, res) => {
+  console.log(req.params);
+  const orderId = req.params.id;
+  // not have to get a new id (prevent in MongoDB)
+  req.body._id = orderId;
+  try {
+    const result = await Customer.findOneAndUpdate(
+      { "orders._id": orderId },
+      {
+        $set: { "orders.$": req.body },
+      },
+      { new: true }
+    );
+    console.log(result);
+    if (result) {
+      res.json(result);
+    } else {
+      res.status(404).json({ error: "something went wrong!" });
+    }
+  } catch (e) {
+    console.log(e.message);
+    res.status(500).json({ error: "something went wrong!" });
   }
 });
 
