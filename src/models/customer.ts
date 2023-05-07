@@ -1,7 +1,6 @@
-//@ts-nocheck
-const mongoose = require("mongoose");
+import { Schema, model } from "mongoose";
 
-const customerSchema = new mongoose.Schema({
+const customerSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -15,4 +14,5 @@ const customerSchema = new mongoose.Schema({
   ],
 });
 
-module.exports = mongoose.model("Customer", customerSchema);
+const Customer = model("customer", customerSchema);
+export default Customer;

@@ -100,3 +100,17 @@ tsc -p tsconfig.json
 ```
 tsc -p tsconfig.json --watch
 ```
+
+- add --watch moden to keep track what have been changed
+
+```
+"scripts": {
+    "start": "npx nodemon",
+    "watch": "tsc -p tsconfig.json --watch'"
+  }
+```
+
+in tsconfig.json
+Type Checking section chagne
+noImplicitAny:false
+useUnknownInCatchVariables": false
